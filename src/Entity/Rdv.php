@@ -40,7 +40,6 @@ class Rdv
      * message = "Lieu invalide")
      */
     private $lieu;
-
     /**
      * @ORM\ManyToOne(targetEntity=Patient::class, inversedBy="RdvPat")
      * @ORM\JoinColumn(nullable=false)
