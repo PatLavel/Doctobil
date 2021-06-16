@@ -44,9 +44,9 @@ class DocteurTest extends KernelTestCase
 
         $this->assertEquals("Charles", $prenom, "getPrenom does not affect the right value.");
     }
-    
-    
-    
+
+
+
     public function testSetAdresse()
     {
         $Docteur = new Docteur();
@@ -64,7 +64,7 @@ class DocteurTest extends KernelTestCase
 
         $this->assertEquals("55 rue du marmiton", $adresse, "getAdresse does not affect the right value.");
     }
-    
+
     public function testSetVille()
     {
         $Docteur = new Docteur();
@@ -82,7 +82,7 @@ class DocteurTest extends KernelTestCase
 
         $this->assertEquals("Lille", $ville, "getVille does not affect the right value.");
     }
-    
+
     public function testSetTelephone()
     {
         $Docteur = new Docteur();
@@ -100,7 +100,7 @@ class DocteurTest extends KernelTestCase
 
         $this->assertEquals("0634585858", $telephone, "getTelephone does not affect the right value.");
     }
-    
+
     public function testSetMail()
     {
         $Docteur = new Docteur();
@@ -118,7 +118,7 @@ class DocteurTest extends KernelTestCase
 
         $this->assertEquals("cfion@protonmail.fr", $mail, "getMail does not affect the right value.");
     }
-    
+
     public function testSetSpecialite()
     {
         $Docteur = new Docteur();
@@ -136,10 +136,240 @@ class DocteurTest extends KernelTestCase
 
         $this->assertEquals("Neurochirurgie", $specialite, "getSpecialite does not affect the right value.");
     }
-    
-    
-    
 
-    
 
+
+    public function testNomIsValid()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setNom("DUPOND");
+        $errors = $validator->validate($doc);
+
+        $this->assertEquals(0, count($errors), "Docteur Name is not valid");
+    }
+    public function testNomIsInvalidMax()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setNom("BOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOB");
+        $errors = $validator->validate($doc);
+
+        $this->assertEquals(1, count($errors), "test1");
+        $this->assertEquals("Your Docteur name cannot be longer than 50 characters", $errors[0]->getMessage());
+    }
+    public function testNomIsInvalidMin()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setNom("");
+        $errors = $validator->validate($doc);
+
+        $this->assertEquals(1, count($errors), "test1");
+        $this->assertEquals("Your Docteur name must be at least 1 characters long", $errors[0]->getMessage());
+    }
+    public function testNomIsInvalidReg()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setNom("DUpont5");
+        $errors = $validator->validate($doc);
+
+        $this->assertEquals(1, count($errors), "test1");
+        $this->assertEquals("Your Docteur name cannot contain a number", $errors[0]->getMessage());
+    }
+
+
+
+
+
+    public function testPrenomIsValid()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setPrenom("Claude");
+        $errors = $validator->validate($doc);
+
+        $this->assertEquals(0, count($errors), "Docteur Surame is not valid");
+    }
+
+    public function testPrenomIsInvalidMax()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setPrenom("BOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOB");
+        $errors = $validator->validate($doc);
+
+        $this->assertEquals(1, count($errors), "test1");
+        $this->assertEquals("Your Docteur surname cannot be longer than 50 characters", $errors[0]->getMessage());
+    }
+    public function testPrenomIsInvalidMin()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setPrenom("");
+        $errors = $validator->validate($doc);
+
+        $this->assertEquals(1, count($errors), "test1");
+        $this->assertEquals("Your Docteur surname must be at least 1 characters long", $errors[0]->getMessage());
+    }
+    public function testPrenomIsInvalidReg()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setPrenom("DUpont5");
+        $errors = $validator->validate($doc);
+
+        $this->assertEquals(1, count($errors), "test1");
+        $this->assertEquals("Your Docteur surname cannot contain a number", $errors[0]->getMessage());
+    }
+
+
+
+
+
+
+    public function testVilleIsValid()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setVille("DUPOND");
+        $errors = $validator->validate($doc);
+
+        $this->assertEquals(0, count($errors), "Docteur Ville is not valid");
+    }
+    public function testVilleIsInvalidMax()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setVille("BOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOB");
+        $errors = $validator->validate($doc);
+
+        $this->assertEquals(1, count($errors), "test1");
+        $this->assertEquals("Your Ville name cannot be longer than 50 characters", $errors[0]->getMessage());
+    }
+    public function testVilleIsInvalidReg()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setVille("Claude5");
+        $errors = $validator->validate($doc);
+
+        $this->assertEquals(1, count($errors), "test1");
+        $this->assertEquals("Your Ville name cannot contain a number", $errors[0]->getMessage());
+    }
+
+
+
+
+    public function testSpecialiteIsValid()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setSpecialite("Neurologie");
+        $errors = $validator->validate($doc);
+
+        $this->assertEquals(0, count($errors), "Docteur Specialité is not valid");
+    }
+    public function testSpecialiteIsInvalidMax()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setSpecialite("BOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOB");
+        $errors = $validator->validate($doc);
+
+        $this->assertEquals(1, count($errors), "test1");
+        $this->assertEquals("Your Specialité name cannot be longer than 50 characters", $errors[0]->getMessage());
+    }
+
+
+
+
+
+
+
+    public function testAdresseIsValid()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setAdresse("35 rue du foin");
+        $errors = $validator->validate($doc);
+
+        $this->assertEquals(0, count($errors), "Docteur Adresse is not valid");
+    }
+    public function testSAdresseIsInvalidMax()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setAdresse("BOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOBBOBOB");
+        $errors = $validator->validate($doc);
+
+        $this->assertEquals(1, count($errors), "test1");
+        $this->assertEquals("Your Adresse cannot be longer than 50 characters", $errors[0]->getMessage());
+    }
+
+
+
+
+
+    public function testMailIsInvalid()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setMail("B@O@iu@y.gb");
+        $errors = $validator->validate($doc);
+        $this->assertEquals(1, count($errors), "test1");
+        $this->assertEquals("The Docteur email is not a valid email.", $errors[0]->getMessage());
+    }
+
+    public function testMailIsValid()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setMail("BOBDUP@moiliuy.gb");
+        $errors = $validator->validate($doc);
+
+        $this->assertEquals(0, count($errors), "Mail invalide");
+    }
+
+
+
+    public function testTelephoneIsInvalidReg()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setTelephone("06 39 08 09 0885ASDDF");
+        $errors = $validator->validate($doc);
+        $this->assertEquals(1, count($errors), "test1");
+        $this->assertEquals("Numero de telephone invalide", $errors[0]->getMessage());
+    }
+
+    public function testTelephoneIsValid()
+    {
+        $kernel = self::bootKernel();
+        $validator = $kernel->getContainer()->get('validator');
+        $doc = new Docteur();
+        $doc->setTelephone("06-39-08-09-08");
+        $errors = $validator->validate($doc);
+
+        $this->assertEquals(0, count($errors), "Numero de telephone invalide");
+    }
 }

@@ -23,14 +23,14 @@ class Docteur
      * @Assert\Length(
      *      min = 1,
      *      max = 50,
-     *      minMessage = "Your name must be at least {{ limit }} characters long",
-     *      maxMessage = "Your name cannot be longer than {{ limit }} characters",
+     *      minMessage = "Your Docteur name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your Docteur name cannot be longer than {{ limit }} characters",
      *      allowEmptyString = false
      *      )
      * @Assert\Regex(
      *     pattern="/\d/",
      *     match=false,
-     *     message="Your name cannot contain a number")
+     *     message="Your Docteur name cannot contain a number")
      * 
      */
     private $nom;
@@ -40,28 +40,28 @@ class Docteur
      * @Assert\Length(
      *      min = 1,
      *      max = 50,
-     *      minMessage = "Your surname must be at least {{ limit }} characters long",
-     *      maxMessage = "Your surname cannot be longer than {{ limit }} characters",
+     *      minMessage = "Your Docteur surname must be at least {{ limit }} characters long",
+     *      maxMessage = "Your Docteur surname cannot be longer than {{ limit }} characters",
      *      allowEmptyString = false
      *      )
      * @Assert\Regex(
      *     pattern="/\d/",
      *     match=false,
-     *     message="Your surname cannot contain a number")
+     *     message="Your Docteur surname cannot contain a number")
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
-     *      max = 255,
-     *      maxMessage = "Your city cannot be longer than {{ limit }} characters",
+     *      max = 50,
+     *      maxMessage = "Your Ville name cannot be longer than {{ limit }} characters",
      *      allowEmptyString = false
      *      )
      * @Assert\Regex(
      *     pattern="/\d/",
      *     match=false,
-     *     message="Your city cannot contain a number")
+     *     message="Your Ville name cannot contain a number")
      * 
      */
     private $ville;
@@ -70,13 +70,13 @@ class Docteur
      * @ORM\Column(type="string", length=50)
      * @Assert\Length(
      *      max = 50,
-     *      maxMessage = "Your specialite cannot be longer than {{ limit }} characters",
+     *      maxMessage = "Your Specialité name cannot be longer than {{ limit }} characters",
      *      allowEmptyString = false
      *      )
      * @Assert\Regex(
      *     pattern="/\d/",
      *     match=false,
-     *     message="Your specialite cannot contain a number"
+     *     message="Your Specialité name cannot contain a number"
      * )
      */
     private $specialite;
@@ -85,7 +85,7 @@ class Docteur
      * @ORM\Column(type="string", length=50)
      * @Assert\Length(
      *      max = 50,
-     *      maxMessage = "Your adress cannot be longer than {{ limit }} characters",
+     *      maxMessage = "Your Adresse cannot be longer than {{ limit }} characters",
      *      allowEmptyString = false
      *      )
      */
@@ -93,7 +93,7 @@ class Docteur
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email."
+     *     message = "The Docteur email is not a valid email."
      * )
      */
     private $mail;
@@ -102,7 +102,7 @@ class Docteur
      * @ORM\Column(type="integer", nullable=true)
      * 
      * @Assert\Regex(
-     *     pattern="/[0-9]{2}[\s.-][0-9]{2}[\s.-][0-9]{2}[\s.-][0-9]{2}[\s.-][0-9]{2}/",
+     *     pattern="/^[0-9]{2}[\s.-][0-9]{2}[\s.-][0-9]{2}[\s.-][0-9]{2}[\s.-][0-9]{2}$/",
      *     match=false,
      *     message="TEL bad"
      * )

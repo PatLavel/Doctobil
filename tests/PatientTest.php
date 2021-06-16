@@ -291,7 +291,7 @@ class PatientTest extends KernelTestCase
 
         $this->assertEquals(0, count($errors), "Numero de securite sociale invalide");
     }
-    
+
     public function testAdresseIsInvalidMax()
     {
         $kernel = self::bootKernel();
@@ -314,7 +314,7 @@ class PatientTest extends KernelTestCase
         $this->assertEquals(0, count($errors), "surName is not valid");
     }
 
-    
+
     public function testVilleIsInvalidMax()
     {
         $kernel = self::bootKernel();
@@ -418,7 +418,7 @@ class PatientTest extends KernelTestCase
         $validator = $kernel->getContainer()->get('validator');
         $patient = new Patient();
         $date = new DateTime();
-        $date->setDate(1923,000, 5484);
+        $date->setDate(1923, 000, 5484);
         $patient->setDdn($date);
         $errors = $validator->checkdate ($patient);
         $this->assertEquals(1, count($errors), "test1");
