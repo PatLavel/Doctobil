@@ -20,21 +20,24 @@ class Rdv
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\Date(
-     * message = "BAD DATE")
+     * @Assert\Type(
+     * type="dateTimeInterface",
+     * message = "BAD RDV DATE")
      */
     private $date;
 
     /**
      * @ORM\Column(type="time")
-     * @Assert\Time(
-     * message = "BAD TIME")
+     * @Assert\Type(
+     * type="dateTimeInterface",
+     * message = "BAD RDV TIME")
      */
     private $heure;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Choice({"Domicile", "Cabinet"})
+     * @Assert\Choice({"Domicile", "Cabinet"},
+     * message = "Lieu invalide")
      */
     private $lieu;
 

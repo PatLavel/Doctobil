@@ -420,7 +420,7 @@ class PatientTest extends KernelTestCase
         $date = new DateTime();
         $date->setDate(1923,000, 5484);
         $patient->setDdn($date);
-        $errors = $validator->validate($patient);
+        $errors = $validator->checkdate ($patient);
         $this->assertEquals(1, count($errors), "test1");
         $this->assertEquals("BAD DATE", $errors[0]->getMessage());
     }
