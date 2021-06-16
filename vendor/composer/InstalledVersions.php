@@ -32,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '0fd9896cb72ac15b761c421eb0d947bad0d03f33',
+    'reference' => '778b1dcc2504ecaa5e78d83fe1824b9d0c8af5fb',
     'name' => '__root__',
   ),
   'versions' => 
@@ -44,7 +44,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '0fd9896cb72ac15b761c421eb0d947bad0d03f33',
+      'reference' => '778b1dcc2504ecaa5e78d83fe1824b9d0c8af5fb',
     ),
     'composer/package-versions-deprecated' => 
     array (
@@ -91,6 +91,15 @@ private static $installed = array (
       ),
       'reference' => 'a036d90c303f3163b5be8b8fde9b6755b2be4a3a',
     ),
+    'doctrine/data-fixtures' => 
+    array (
+      'pretty_version' => '1.5.0',
+      'version' => '1.5.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '51d3d4880d28951fff42a635a2389f8c63baddc5',
+    ),
     'doctrine/dbal' => 
     array (
       'pretty_version' => '2.13.1',
@@ -117,6 +126,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '4202ce675d29e70a8b9ee763bec021b6f44caccb',
+    ),
+    'doctrine/doctrine-fixtures-bundle' => 
+    array (
+      'pretty_version' => '3.4.0',
+      'version' => '3.4.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '870189619a7770f468ffb0b80925302e065a3b34',
     ),
     'doctrine/doctrine-migrations-bundle' => 
     array (
@@ -493,8 +511,8 @@ private static $installed = array (
     array (
       'provided' => 
       array (
-        0 => '1.0',
-        1 => '1.0.0',
+        0 => '1.0.0',
+        1 => '1.0',
       ),
     ),
     'psr/simple-cache-implementation' => 

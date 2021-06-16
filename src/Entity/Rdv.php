@@ -42,14 +42,18 @@ class Rdv
     private $lieu;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=Patient::class, inversedBy="RdvPat")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $idpat;
+    private $idPat;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=Docteur::class, inversedBy="RdvDoc")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $iddoc;
+    private $IdDoc;
+
+
 
     public function getId(): ?int
     {
@@ -92,26 +96,26 @@ class Rdv
         return $this;
     }
 
-    public function getIdpat(): ?int
+    public function getIdPat(): ?Patient
     {
-        return $this->idpat;
+        return $this->idPat;
     }
 
-    public function setIdpat(int $idpat): self
+    public function setIdPat(?Patient $idPat): self
     {
-        $this->idpat = $idpat;
+        $this->idPat = $idPat;
 
         return $this;
     }
 
-    public function getIddoc(): ?int
+    public function getIdDoc(): ?Docteur
     {
-        return $this->iddoc;
+        return $this->IdDoc;
     }
 
-    public function setIddoc(int $iddoc): self
+    public function setIdDoc(?Docteur $IdDoc): self
     {
-        $this->iddoc = $iddoc;
+        $this->IdDoc = $IdDoc;
 
         return $this;
     }

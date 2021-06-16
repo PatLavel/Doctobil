@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DocteurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -99,15 +101,25 @@ class Docteur
     private $mail;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     * 
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(allowNull = true)
      * @Assert\Regex(
      *     pattern="/^[0-9]{2}[\s.-][0-9]{2}[\s.-][0-9]{2}[\s.-][0-9]{2}[\s.-][0-9]{2}$/",
-     *     match=false,
-     *     message="TEL bad"
+     *     match=true,
+     *     message="Numero de telephone invalide"
      * )
      */
     private $telephone;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Rdv::class, mappedBy="IdDoc")
+     */
+    private $RdvDoc;
+
+    public function __construct()
+    {
+        $this->RdvDoc = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -186,14 +198,44 @@ class Docteur
         return $this;
     }
 
-    public function getTelephone(): ?int
+    public function getTelephone(): ?string
     {
         return $this->telephone;
     }
 
-    public function setTelephone(?int $telephone): self
+    public function setTelephone(?string $telephone): self
     {
         $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Rdv[]
+     */
+    public function getRdvDoc(): Collection
+    {
+        return $this->RdvDoc;
+    }
+
+    public function addRdvDoc(Rdv $rdvDoc): self
+    {
+        if (!$this->RdvDoc->contains($rdvDoc)) {
+            $this->RdvDoc[] = $rdvDoc;
+            $rdvDoc->setIdDoc($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRdvDoc(Rdv $rdvDoc): self
+    {
+        if ($this->RdvDoc->removeElement($rdvDoc)) {
+            // set the owning side to null (unless already changed)
+            if ($rdvDoc->getIdDoc() === $this) {
+                $rdvDoc->setIdDoc(null);
+            }
+        }
 
         return $this;
     }

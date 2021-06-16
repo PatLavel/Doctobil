@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PatientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -111,11 +113,20 @@ class Patient
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\Type(
-     * type="dateTimeInterface",
+     * @Assert\Date(
      * message = "BAD DATE")
      */
     private $ddn;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Rdv::class, mappedBy="idPat")
+     */
+    private $RdvPat;
+
+    public function __construct()
+    {
+        $this->RdvPat = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -226,6 +237,36 @@ class Patient
     public function setDdn(\DateTimeInterface $ddn): self
     {
         $this->ddn = $ddn;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Rdv[]
+     */
+    public function getRdvPat(): Collection
+    {
+        return $this->RdvPat;
+    }
+
+    public function addRdvPat(Rdv $rdvPat): self
+    {
+        if (!$this->RdvPat->contains($rdvPat)) {
+            $this->RdvPat[] = $rdvPat;
+            $rdvPat->setIdPat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRdvPat(Rdv $rdvPat): self
+    {
+        if ($this->RdvPat->removeElement($rdvPat)) {
+            // set the owning side to null (unless already changed)
+            if ($rdvPat->getIdPat() === $this) {
+                $rdvPat->setIdPat(null);
+            }
+        }
 
         return $this;
     }
