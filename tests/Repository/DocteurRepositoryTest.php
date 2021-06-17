@@ -2,13 +2,12 @@
 
 namespace App\Tests\Repository;
 
-
 use App\DataFixtures\RdvFixtures;
-use App\Repository\RdvRepository;
+use App\Repository\DocteurRepository;
 use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class RdvRepositoryTest extends KernelTestCase
+class DocteurRepositoryTest extends KernelTestCase
 {
 
     use FixturesTrait;
@@ -18,7 +17,7 @@ class RdvRepositoryTest extends KernelTestCase
     public function testFindAll()
     {
         self::bootKernel();
-        $repository = self::$container->get(RdvRepository::class);
+        $repository = self::$container->get(DocteurRepository::class);
         $this->loadFixtures([RdvFixtures::class]);
         $rdv = $repository->findAll();
         $this->assertCount(5, $rdv);
@@ -27,16 +26,16 @@ class RdvRepositoryTest extends KernelTestCase
     public function testFindBy()
     {
         self::bootKernel();
-        $repository = self::$container->get(RdvRepository::class);
+        $repository = self::$container->get(DocteurRepository::class);
         $this->loadFixtures([RdvFixtures::class]);
-        $rdv = $repository->findBy(['date' => '2021-05-05']);
+        $rdv = $repository->findBy(['specialite' => 'Neurologie']);
         $this->assertCount(5, $rdv);
     }
 
     public function testFind()
     {
         self::bootKernel();
-        $repository = self::$container->get(RdvRepository::class);
+        $repository = self::$container->get(DocteurRepository::class);
         $this->loadFixtures([RdvFixtures::class]);
         $a = $repository->findAll();
         $id = $a[0]->getId();
@@ -47,11 +46,9 @@ class RdvRepositoryTest extends KernelTestCase
     public function testFindOneBy()
     {
         self::bootKernel();
-        $repository = self::$container->get(RdvRepository::class);
+        $repository = self::$container->get(DocteurRepository::class);
         $this->loadFixtures([RdvFixtures::class]);
-        $a = $repository->findAll();
-        $id = $a[0]->getId();
-        $rdv = $repository->findOneBy(['id_pat_id' => $id]);
-        $this->assertCount($id, $rdv->getIdPat());
+        $rdv = $repository->findOneBy(['nom' => 'Patientb']);
+        $this->assertCount('Patientb', $rdv->getNom());
     }
 }
