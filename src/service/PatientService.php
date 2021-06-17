@@ -15,4 +15,16 @@ class PatientService
         $this->PatientRepository = $repository;
         $this->manager = $entityManager;
     }
+
+
+    public function FindBy()
+    {
+        return $this->PatientRepository->testFindOneBy();
+    }
+
+    public function Find($id)
+    {
+        return $this->PatientRepository->testFindOneBy($id);
+    }
+
 }
