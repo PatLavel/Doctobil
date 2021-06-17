@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\ervice;
 
 use App\Repository\PatientRepository;
 use Doctrine\ORM\EntityManagerInterface;

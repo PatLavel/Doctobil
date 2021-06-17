@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\sService;
 
 use App\Repository\RdvRepository;
 use Doctrine\ORM\EntityManagerInterface;
