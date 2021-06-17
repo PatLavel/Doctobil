@@ -6,7 +6,7 @@ use App\Entity\Docteur;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
-class MedecinFixture extends Fixture
+class MedecinFixture 
 {
     public function load(ObjectManager $manager)
     {

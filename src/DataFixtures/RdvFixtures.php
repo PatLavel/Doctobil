@@ -13,7 +13,7 @@ class RdvFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        for ($i = 1; $i > 6; $i++) {
+        for ($i = 1; $i < 6; $i++) {
             $patient = new Patient();
             $ddn = new DateTime;
             $ddn->setDate(1978, 06, 07);
@@ -52,4 +52,6 @@ class RdvFixtures extends Fixture
 
         $manager->flush();
     }
+
+
 }
