@@ -29,7 +29,7 @@ class RdvRepositoryTest extends KernelTestCase
         self::bootKernel();
         $repository = self::$container->get(RdvRepository::class);
         $this->loadFixtures([RdvFixtures::class]);
-        $rdv = $repository->findBy(['date' => '2021-05-05']);
+        $rdv = $repository->findBy(['lieu' => 'Cabinet']);
         $this->assertCount(5, $rdv);
     }
 
@@ -41,7 +41,7 @@ class RdvRepositoryTest extends KernelTestCase
         $a = $repository->findAll();
         $id = $a[0]->getId();
         $rdv = $repository->find($id);
-        $this->assertCount($id, $rdv->getId());
+        $this->assertEquals($id, $rdv->getId());
     }
 
     public function testFindOneBy()
@@ -51,7 +51,7 @@ class RdvRepositoryTest extends KernelTestCase
         $this->loadFixtures([RdvFixtures::class]);
         $a = $repository->findAll();
         $id = $a[0]->getId();
-        $rdv = $repository->findOneBy(['id_pat_id' => $id]);
-        $this->assertCount($id, $rdv->getIdPat());
+        $rdv = $repository->findOneBy(['idPat' => $id]);
+        $this->assertEquals($id, $rdv->getIdPat()->getId());
     }
 }

@@ -20,17 +20,13 @@ class Rdv
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\Type(
-     * type="dateTimeInterface",
-     * message = "BAD RDV DATE")
+     * 
      */
     private $date;
 
     /**
      * @ORM\Column(type="time")
-     * @Assert\Type(
-     * type="dateTimeInterface",
-     * message = "BAD RDV TIME")
+     *
      */
     private $heure;
 

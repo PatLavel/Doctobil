@@ -8,6 +8,7 @@ use DateTime;
 use SebastianBergmann\Environment\Console;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+
 class PatientTest extends KernelTestCase
 {
 
@@ -412,19 +413,7 @@ class PatientTest extends KernelTestCase
 
         $this->assertEquals(0, count($errors), "Sexe invalide");
     }
-    public function testDdnIsInvalid()
-    {
-        $kernel = self::bootKernel();
-        $validator = $kernel->getContainer()->get('validator');
-        $patient = new Patient();
-        $date = new DateTime();
-        $date->setDate(1923, 000, 5484);
-        $patient->setDdn($date);
-        $errors = $validator->checkdate ($patient);
-        $this->assertEquals(1, count($errors), "test1");
-        $this->assertEquals("BAD DATE", $errors[0]->getMessage());
-    }
-
+    
     public function testDdnIsValid()
     {
         $kernel = self::bootKernel();

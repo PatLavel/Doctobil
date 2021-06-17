@@ -113,8 +113,6 @@ class Patient
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\Date(
-     * message = "BAD DATE")
      */
     private $ddn;
 

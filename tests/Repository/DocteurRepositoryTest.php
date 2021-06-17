@@ -19,8 +19,8 @@ class DocteurRepositoryTest extends KernelTestCase
         self::bootKernel();
         $repository = self::$container->get(DocteurRepository::class);
         $this->loadFixtures([RdvFixtures::class]);
-        $rdv = $repository->findAll();
-        $this->assertCount(5, $rdv);
+        $doc = $repository->findAll();
+        $this->assertCount(5, $doc);
     }
 
     public function testFindBy()
@@ -28,8 +28,8 @@ class DocteurRepositoryTest extends KernelTestCase
         self::bootKernel();
         $repository = self::$container->get(DocteurRepository::class);
         $this->loadFixtures([RdvFixtures::class]);
-        $rdv = $repository->findBy(['specialite' => 'Neurologie']);
-        $this->assertCount(5, $rdv);
+        $doc = $repository->findBy(['specialite' => 'Neurologie']);
+        $this->assertCount(5, $doc);
     }
 
     public function testFind()
@@ -39,8 +39,8 @@ class DocteurRepositoryTest extends KernelTestCase
         $this->loadFixtures([RdvFixtures::class]);
         $a = $repository->findAll();
         $id = $a[0]->getId();
-        $rdv = $repository->find($id);
-        $this->assertCount($id, $rdv->getId());
+        $doc = $repository->find($id);
+        $this->assertEquals($id, $doc->getId());
     }
 
     public function testFindOneBy()
@@ -48,7 +48,7 @@ class DocteurRepositoryTest extends KernelTestCase
         self::bootKernel();
         $repository = self::$container->get(DocteurRepository::class);
         $this->loadFixtures([RdvFixtures::class]);
-        $rdv = $repository->findOneBy(['nom' => 'Patientb']);
-        $this->assertCount('Patientb', $rdv->getNom());
+        $doc = $repository->findOneBy(['nom' => 'Docteurb']);
+        $this->assertEquals('Docteurb', $doc->getNom());
     }
 }
