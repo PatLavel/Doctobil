@@ -1,21 +1,23 @@
 <?php
 namespace App\Controller;
 
-use Doctrine\DBAL\Schema\View;
-use FOS\RestBundle\Controller\Anottations\Get;
+use App\Entity\Docteur;
+use FOS\RestBundle\View\View;
+use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 
 class DocteurController extends AbstractFOSRestController
 {
     /**
      * 
-     * @get("docteur")
+     * 
+     * @Get("docteur")
      * @return void
      * 
      */
 
         public function getall(){
-           $this->getDoctrine()->getRepository(Patient::class)->findAll();
+            $docteur = $this->getDoctrine()->getRepository(Docteur::class)->findAll();
             return View::create($docteur,200);
         }
 
