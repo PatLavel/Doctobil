@@ -17,6 +17,10 @@ class DocteurService
     }
 
 
+    public function Find(array $id)
+    {
+        return $this->DocteurRepository->testFindOneBy($id);
+    }
     public function FindBy(array $tab)
     {
         return $this->DocteurRepository->testFindOneBy($tab);
