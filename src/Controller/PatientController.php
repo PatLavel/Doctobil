@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use FOS\RestBundle\View\View;
+use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 
 class PatientController extends AbstractFOSRestController
@@ -13,7 +15,7 @@ class PatientController extends AbstractFOSRestController
      */
     public function getAll()
     {
-        $this->getDoctrine()->getRepository(Patient::class)->findAll();
+        $docteur = $this->getDoctrine()->getRepository(Patient::class)->findAll();
         return View::create($docteur, 200);
     }
 }
