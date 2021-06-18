@@ -9,14 +9,12 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 class DocteurController extends AbstractFOSRestController
 {
     /**
-     * 
-     * 
-     * @Get("docteur")
+     * @Get("Docteur")
      * @return void
      * 
      */
 
-        public function getall(){
+        public function getAll(){
             $docteur = $this->getDoctrine()->getRepository(Docteur::class)->findAll();
             return View::create($docteur,200);
         }
