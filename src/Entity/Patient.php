@@ -116,10 +116,10 @@ class Patient
      */
     private $ddn;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Rdv::class, mappedBy="idPat")
-     */
-    private $RdvPat;
+    // /**
+    //  * @ORM\OneToMany(targetEntity=Rdv::class, mappedBy="idPat")
+    //  */
+    // private $RdvPat;
 
     public function __construct()
     {
@@ -239,33 +239,33 @@ class Patient
         return $this;
     }
 
-    /**
-     * @return Collection|Rdv[]
-     */
-    public function getRdvPat(): Collection
-    {
-        return $this->RdvPat;
-    }
+    // /**
+    //  * @return Collection|Rdv[]
+    //  */
+    // public function getRdvPat(): Collection
+    // {
+    //     return $this->RdvPat;
+    // }
 
-    public function addRdvPat(Rdv $rdvPat): self
-    {
-        if (!$this->RdvPat->contains($rdvPat)) {
-            $this->RdvPat[] = $rdvPat;
-            $rdvPat->setIdPat($this);
-        }
+    // public function addRdvPat(Rdv $rdvPat): self
+    // {
+    //     if (!$this->RdvPat->contains($rdvPat)) {
+    //         $this->RdvPat[] = $rdvPat;
+    //         $rdvPat->setIdPat($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeRdvPat(Rdv $rdvPat): self
-    {
-        if ($this->RdvPat->removeElement($rdvPat)) {
-            // set the owning side to null (unless already changed)
-            if ($rdvPat->getIdPat() === $this) {
-                $rdvPat->setIdPat(null);
-            }
-        }
+    // public function removeRdvPat(Rdv $rdvPat): self
+    // {
+    //     if ($this->RdvPat->removeElement($rdvPat)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($rdvPat->getIdPat() === $this) {
+    //             $rdvPat->setIdPat(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

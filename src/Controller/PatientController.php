@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Patient;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -10,7 +11,7 @@ class PatientController extends AbstractFOSRestController
 {
 
     /**
-     * @Get('Patient')
+     * @Get("Patient")
      * @return void
      */
     public function getAll()
