@@ -14,8 +14,17 @@ class RdvService
     }
 
 
-    public function FindBy(array $tab)
+    
+    public function find(array $id)
     {
-        return $this->RdvRepository->testFindOneBy($tab);
+        return $this->RdvRepository->findOneBy($id);
+    }
+    public function findBy(array $tab)
+    {
+        return $this->RdvRepository->findOneBy($tab);
+    }
+    public function findAll()
+    {
+        return $this->RdvRepository->findOneBy();
     }
 }

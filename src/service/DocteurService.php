@@ -16,18 +16,16 @@ class DocteurService
         $this->manager = $entityManager;
     }
 
-
-    public function Find(array $id)
+    public function find(array $id)
     {
-        return $this->DocteurRepository->testFindOneBy($id);
+        return $this->DocteurRepository->findOneBy($id);
     }
-    public function FindBy(array $tab)
+    public function findBy(array $tab)
     {
-        return $this->DocteurRepository->testFindOneBy($tab);
+        return $this->DocteurRepository->findOneBy($tab);
     }
-    public function FindAll()
+    public function findAll()
     {
-        return $this->DocteurRepository->testFindOneBy();
+        return $this->DocteurRepository->findOneBy();
     }
-
 }
