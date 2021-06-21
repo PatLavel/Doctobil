@@ -17,24 +17,24 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class RdvController extends AbstractFOSRestController
 {
-    // /**
-    //  * @Get("Rdv")
-    //  * @return void
-    //  */
-    // public function getAll()
-    // {
-    //     $rdv = $this->getDoctrine()->getRepository(Rdv::class)->findAll();
-    //     return View::create($rdv, 200, ["content/type => application/json"]);
-    // }
+    /**
+     * @Get("Rdv")
+     * @return void
+     */
+    public function getAll()
+    {
+        $rdv = $this->getDoctrine()->getRepository(Rdv::class)->findAll();
+        return View::create($rdv, 200, ["content/type => application/json"]);
+    }
 
-    // /**
-    //  * @Get("Rdv/{id})
-    //  * 
-    //  */
-    // public function getOneBy(Rdv $rdv)
-    // {
-    //     return View::create($rdv, 200, ["content/type => application/json"]);
-    // }
+    /**
+     * @Get("Rdv/{id}")
+     * @return void
+     */
+    public function getOneBy(Rdv $rdv)
+    {
+        return View::create($rdv, 200, ["content/type => application/json"]);
+    }
 
     /**
      * @Post("/Rdv")

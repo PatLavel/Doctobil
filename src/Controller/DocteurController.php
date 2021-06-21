@@ -35,7 +35,7 @@ class DocteurController extends AbstractFOSRestController
     {
         return View::create($docteur, 200);
     }
-    
+
     /**
      * @Get("/Docteur/Delete/{id}")
      * 
@@ -65,27 +65,4 @@ class DocteurController extends AbstractFOSRestController
         $em->flush();
         return View::create(null, 200);
     }
-
-
-    /**
-     * @Post("/Doc")
-     * @ParamConverter
-     * @return void
-     */
-    public function postDoc(Request $request)
-    {
-        $data = new Docteur;
-        $nom = $request->get('nom');
-        $prenom = $request->get('prenom');
-        $ville = $request->get('ville');
-        $data->setNom($nom);
-        $data->setPrenom($prenom);
-        $data->setVille($ville);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($data);
-        $em->flush();
-        return new View("User Added Successfully", Response::HTTP_OK);
-    }
-
-
 }
