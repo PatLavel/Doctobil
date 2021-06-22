@@ -23,12 +23,10 @@ class RdvMapper
 
     public function convertRdvDTOToRdvEntity(RdvDTO $RdvDTO): Rdv
     {
-        $DocteurMapper = new DocteurMapper();
-        $PatientMapper = new PatientMapper();
+        // $DocteurMapper = new DocteurMapper();
+        // $PatientMapper = new PatientMapper();
         $Rdv = new Rdv();
-        $Rdv->setDate($Rdv->getDate())->setHeure($Rdv->getHeure())->setLieu($RdvDTO->getLieu());
-        $Rdv->setIdDoc($DocteurMapper->convertDocteurDTOToDocteurEntity($RdvDTO->getDocteurDTO()));
-        $Rdv->setIdPat($PatientMapper->convertPatientDTOToPatientEntity($RdvDTO->getPatientDTO()));
+        $Rdv->setDate($RdvDTO->getDate())->setHeure($RdvDTO->getHeure())->setLieu($RdvDTO->getLieu());
 
         return $Rdv;
     }

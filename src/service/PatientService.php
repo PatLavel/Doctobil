@@ -15,7 +15,7 @@ class PatientService
 
     public function __construct(
         PatientRepository $repo,
-        EntityManagerInterface $manager,
+        EntityManagerInterface $manager
     ) {
         $this->patientRepository = $repo;
         $this->entityManager = $manager;

@@ -5,14 +5,27 @@ namespace App\Service;
 use App\DTO\RdvDTO;
 use App\Mapper\RdvMapper;
 use App\Repository\RdvRepository;
+use App\Repository\DocteurRepository;
+use App\Repository\PatientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class RdvService
 {
-    public function __construct(RdvRepository $repository, EntityManagerInterface $entityManager)
+
+    
+    private $patientRepository;
+    private $docteurRepository;
+    private $entityManager;
+    public function __construct(RdvRepository $repository, 
+    EntityManagerInterface $entityManager,
+    DocteurRepository $docteurRepository,
+    PatientRepository $patientRepository)
     {
         $this->RdvRepository = $repository;
-        $this->manager = $entityManager;
+        $this->docteurRepository = $docteurRepository;
+        $this->patientRepository = $patientRepository;
+
+        $this->entityManager = $entityManager;
     }
 
 
@@ -32,35 +45,15 @@ class RdvService
 
     public function create(RdvDTO $rdvDTO)
     {
-
-        //$DocteurToSave = (new DocteurMapper)->convertDocteurDTOToDocteurEntity($DocteurDTO);
-
-        // $repoDoc = $this->getDoctrine()->getRepository(Docteur::class);
-        // $repoPat = $this->getDoctrine()->getRepository(Patient::class);
-        // if ($repoDoc->find($rdv->getIdDoc()->getId()) == null) {
-        //     $manager->persist($rdv->getIdDoc());
-        // } else {
-        //     $doc = $repoDoc->find($rdv->getIdDoc()->getId());
-        //     $rdv->setIdDoc($doc);
-        // }
-        // if ($repoPat->find($rdv->getIdPat()->getId()) == null) {
-        //     $manager->persist($rdv->getIdPat());
-        // } else {
-        //     $pat = $repoPat->find($rdv->getIdPat()->getId());
-        //     $rdv->setIdPat($pat);
-        // }
-
-
-
-        $selectedDocteur = $this->DocteurRepository->find($rdvDTO->getDocteurId());
-        $selectedPatient = $this->PatientRepository->find($rdvDTO->getPatientId());
+        $selectedDocteur = $this->docteurRepository->find($rdvDTO->getIdDoc());
+        $selectedPatient = $this->patientRepository->find($rdvDTO->getIdPat());
         if ($selectedDocteur == null || $selectedPatient == null) {
             return false;
         }
         $rdvToSave = (new RdvMapper)->convertRdvDTOToRdvEntity($rdvDTO);
         $rdvToSave->setIdDoc($selectedDocteur);
-        $rdvToSave->setIdDoc($selectedPatient);
-
+        $rdvToSave->setIdPat($selectedPatient);
+        //dd($rdvToSave);
         $this->entityManager->persist($rdvToSave);
         $this->entityManager->flush();
         return True;

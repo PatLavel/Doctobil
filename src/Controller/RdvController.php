@@ -5,8 +5,7 @@ namespace App\Controller;
 use DateTime;
 use App\DTO\RdvDTO;
 use App\Entity\Rdv;
-use App\Entity\Docteur;
-use App\Entity\Patient;
+use App\Service\RdvService;
 use FOS\RestBundle\View\View;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\BrowserKit\Request;
@@ -18,8 +17,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class RdvController extends AbstractFOSRestController
 {
+
+    private $rdvService;
+
+    public function __construct(RdvService $rdvService)
+    {
+        $this->rdvService = $rdvService;
+    }
+
+
     /**
-     * @Get("Rdv")
+     * @Get("rdvs")
      * @return void
      */
     public function getAll()
@@ -29,7 +37,7 @@ class RdvController extends AbstractFOSRestController
     }
 
     /**
-     * @Get("Rdv/{id}")
+     * @Get("rdvs/{id}")
      * @return void
      */
     public function getOneBy(Rdv $rdv)
@@ -38,8 +46,8 @@ class RdvController extends AbstractFOSRestController
     }
 
     /**
-     * @Post("/Rdv")
-     * @ParamConverter("rdv", converter = "fos_rest.request_body")
+     * @Post("/rdvs")
+     * @ParamConverter("rdvDTO", converter = "fos_rest.request_body")
      * @return void
      */
     public function create(RdvDTO $rdvDTO)

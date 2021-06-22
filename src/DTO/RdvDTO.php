@@ -9,8 +9,8 @@ class RdvDTO
     private $date;
     private $lieu;
     private $heure;
-    private $docteurId;
-    private $patientId;
+    private $idDoc;
+    private $idPat;
     private $docteurDTO;
     private $patientDTO;
 
@@ -64,7 +64,7 @@ class RdvDTO
 
     public function getDocteurDTO(): ?DocteurDTO
     {
-        return $this->DocteurDTO;
+        return $this->docteurDTO;
     }
 
     public function setDocteurDTO(?DocteurDTO $docteur): self
@@ -74,14 +74,14 @@ class RdvDTO
         return $this;
     }
 
-    public function getDocteurId(): ?int
+    public function getIdDoc(): ?int
     {
-        return $this->docteurId;
+        return $this->idDoc;
     }
 
-    public function setDocteurId(?int $id): self
+    public function setIdDoc(?int $id): self
     {
-        $this->docteurId = $id;
+        $this->idDoc = $id;
 
         return $this;
     }
@@ -98,14 +98,14 @@ class RdvDTO
         return $this;
     }
 
-    public function getPatientId(): ?int
+    public function getIdPat(): ?int
     {
-        return $this->patientId;
+        return $this->idPat;
     }
 
-    public function setPatientId(?int $id): self
+    public function setIdPat(?int $id): self
     {
-        $this->patientId = $id;
+        $this->idPat = $id;
 
         return $this;
     }
