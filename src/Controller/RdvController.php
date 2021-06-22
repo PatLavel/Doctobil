@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use DateTime;
+use App\DTO\RdvDTO;
 use App\Entity\Rdv;
 use App\Entity\Docteur;
 use App\Entity\Patient;
@@ -41,25 +42,31 @@ class RdvController extends AbstractFOSRestController
      * @ParamConverter("rdv", converter = "fos_rest.request_body")
      * @return void
      */
-    public function create(Rdv $rdv)
+    public function create(RdvDTO $rdvDTO)
     {
-        $manager = $this->getDoctrine()->getManager();
-        $repoDoc = $this->getDoctrine()->getRepository(Docteur::class);
-        $repoPat = $this->getDoctrine()->getRepository(Patient::class);
-        if ($repoDoc->find($rdv->getIdDoc()->getId()) == null) {
-            $manager->persist($rdv->getIdDoc());
-        } else {
-            $doc = $repoDoc->find($rdv->getIdDoc()->getId());
-            $rdv->setIdDoc($doc);
+        if (!$this->rdvService->create($rdvDTO)) {
+            return View::create(null, 404);
         }
-        if ($repoPat->find($rdv->getIdPat()->getId()) == null) {
-            $manager->persist($rdv->getIdPat());
-        } else {
-            $pat = $repoPat->find($rdv->getIdPat()->getId());
-            $rdv->setIdPat($pat);
-        }
-        $manager->persist($rdv);
-        $manager->flush();
-        return View::create(null, 200);
+        return View::create(null, 201);
+
+
+        // $manager = $this->getDoctrine()->getManager();
+        // $repoDoc = $this->getDoctrine()->getRepository(Docteur::class);
+        // $repoPat = $this->getDoctrine()->getRepository(Patient::class);
+        // if ($repoDoc->find($rdv->getIdDoc()->getId()) == null) {
+        //     $manager->persist($rdv->getIdDoc());
+        // } else {
+        //     $doc = $repoDoc->find($rdv->getIdDoc()->getId());
+        //     $rdv->setIdDoc($doc);
+        // }
+        // if ($repoPat->find($rdv->getIdPat()->getId()) == null) {
+        //     $manager->persist($rdv->getIdPat());
+        // } else {
+        //     $pat = $repoPat->find($rdv->getIdPat()->getId());
+        //     $rdv->setIdPat($pat);
+        // }
+        // $manager->persist($rdv);
+        // $manager->flush();
+        // return View::create(null, 200);
     }
 }
