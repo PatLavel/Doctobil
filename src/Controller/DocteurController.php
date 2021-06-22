@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\DTO\DocteurDTO;
 use App\Entity\Docteur;
 use FOS\RestBundle\View\View;
+use App\Service\DocteurService;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\Get;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,26 +45,28 @@ class DocteurController extends AbstractFOSRestController
      */
     public function deleteDoc(int $id)
     {
+        // $em = $this->getDoctrine()->getManager();
+        // $docteur = $em->getRepository(Docteur::class)->find($id);
+        // $em->remove($docteur);
+        // $em->flush();
 
-        $em = $this->getDoctrine()->getManager();
-
-        $docteur = $em->getRepository(Docteur::class)->find($id);
-
-        $em->remove($docteur);
-        $em->flush();
-        return new View("Docteur Removed Successfully", Response::HTTP_OK);
+        if(!$this->DocteurService->remove($id)){
+            return View::create(null, 404);
+        }
+        return View::create(null, 201);
     }
-
+    
     /**
+     *  
      * @Post("/Docteur")
-     * @ParamConverter("docteur", converter="fos_rest.request_body")
+     * @ParamConverter("DocteurDTO", converter="fos_rest.request_body")
      * @return void
      */
-    public function postDocteur(Docteur $docteur)
+    public function create(DocteurDTO $DocteurDTO)
     {
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($docteur);
-        $em->flush();
-        return View::create(null, 200);
+        if(!$this->DocteurService->save($DocteurDTO)){
+            return View::create(null, 404);
+        }
+        return View::create(null, 201);
     }
 }
