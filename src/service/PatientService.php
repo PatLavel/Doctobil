@@ -10,7 +10,6 @@ use Doctrine\ORM\EntityManagerInterface;
 class PatientService
 {
     private $patientRepository;
-    private $medecinRepository;
     private $entityManager;
 
     public function __construct(
@@ -24,12 +23,12 @@ class PatientService
 
     public function FindBy()
     {
-        return $this->PatientRepository->testFindOneBy();
+        return $this->patientRepository->testFindOneBy();
     }
 
     public function Find($id)
     {
-        return $this->PatientRepository->testFindOneBy($id);
+        return $this->patientRepository->testFindOneBy($id);
     }
 
     public function findAll()
@@ -55,7 +54,7 @@ class PatientService
     public function remove(int $id)
     {
 
-        $patient = $this->PatientRepository->find($id);
+        $patient = $this->patientRepository->find($id);
         $this->entityManager->remove($patient);
         $this->entityManager->flush();
 

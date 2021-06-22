@@ -57,24 +57,19 @@ class RdvController extends AbstractFOSRestController
         }
         return View::create(null, 201);
 
+    }
+    /**
+     * @Get("/rdvs/Delete/{id}")
+     * 
+     * @return void
+     */
+    public function removeRdv(int $id)
+    {
+        if (!$this->rdvService->remove($id)) {
+            return View::create(null, 404);
+        }
+        return View::create(null, 201);
 
-        // $manager = $this->getDoctrine()->getManager();
-        // $repoDoc = $this->getDoctrine()->getRepository(Docteur::class);
-        // $repoPat = $this->getDoctrine()->getRepository(Patient::class);
-        // if ($repoDoc->find($rdv->getIdDoc()->getId()) == null) {
-        //     $manager->persist($rdv->getIdDoc());
-        // } else {
-        //     $doc = $repoDoc->find($rdv->getIdDoc()->getId());
-        //     $rdv->setIdDoc($doc);
-        // }
-        // if ($repoPat->find($rdv->getIdPat()->getId()) == null) {
-        //     $manager->persist($rdv->getIdPat());
-        // } else {
-        //     $pat = $repoPat->find($rdv->getIdPat()->getId());
-        //     $rdv->setIdPat($pat);
-        // }
-        // $manager->persist($rdv);
-        // $manager->flush();
-        // return View::create(null, 200);
+        
     }
 }

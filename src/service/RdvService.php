@@ -58,4 +58,14 @@ class RdvService
         $this->entityManager->flush();
         return True;
     }
+
+    public function remove(int $id)
+    {
+
+        $Rdv = $this->RdvRepository->find($id);
+        $this->entityManager->remove($Rdv);
+        $this->entityManager->flush();
+        
+        return true;
+    }
 }
