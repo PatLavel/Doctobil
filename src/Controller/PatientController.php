@@ -3,11 +3,15 @@
 namespace App\Controller;
 
 use DateTime;
+use App\DTO\PatientDTO;
 use App\Entity\Patient;
+use App\Mapper\PatientMapper;
 use FOS\RestBundle\View\View;
+use App\Service\PatientService;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\BrowserKit\Request;
 use FOS\RestBundle\Controller\Annotations\Get;
+use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations\Post;
 use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -16,50 +20,64 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class PatientController extends AbstractFOSRestController
 {
 
+    private $patientService;
+
+    public function __construct(PatientService $patientService)
+    {
+        $this->patientService = $patientService;
+    }
+
     /**
      * @Get("Patient")
      * @return void
      */
     public function getAll()
     {
-        $patient = $this->getDoctrine()->getRepository(Patient::class)->findAll();
-        return View::create($patient, 200, ["content/type => application/json"]);
+        $patientDto = $this->patientService->findAll();
+        return View::create($patientDto, 200, ["content/type => application/json"]);
     }
 
     /**
      * 
      * @Get("Patient/{id}")
+     * 
+     * @param int $id
      * @return void
      */
-    public function getOneBy(Patient $patient)
+    public function getOneBy(PatientDTO $patientDTO)
     {
-        return View::create($patient, 200, ["content/type => application/json"]);
+        return View::create($patientDTO, 200, ["content/type => application/json"]);
     }
 
-    // /**
-    //  * @Delete("Patient/{id}")
-    //  */
+
 
     /**
      * @Post("/Patient")
      * @ParamConverter("patient", converter = "fos_rest.request_body")
      * @return void
      */
-    public function create(Patient $patient)
+    public function create(PatientDTO $patientDTO)
     {
-        $manager = $this->getDoctrine()->getManager();
-        $manager->persist($patient);
-        $manager->flush();
-        return View::create(null, 200);
+        if (!$this->patientService->save($patientDTO)) {
+            return View::create(null, 404);
+        }
+        return View::create(null, 201);
     }
 
-    // /**
-    //  * @Put("/Patient/Edit/{id}")
-    //  *
-    //  */
-    // public function update($id)
-    // {
-    //     $manager = $this->getDoctrine->getManager();
-    //     $patient = $entityManager->getRepository(Patient::class)->find($id);
-    // }
+    /**
+     * @Get("/Patient/Delete/{id}")
+     * 
+     * @return void
+     */
+    public function deletePat(int $id)
+    {
+
+
+
+        $patient = $this->patientService->getRepository(PatientDTO::class)->find($id);
+
+        $this->entityManager->remove($patient);
+        $this->entityManager->flush();
+        return new View("Patient Removed Successfully", Response::HTTP_OK);
+    }
 }
