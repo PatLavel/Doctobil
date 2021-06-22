@@ -1,0 +1,76 @@
+openapi: 3.0.0
+info:
+  title: 'Swagger Doctolib'
+  description: 'This is a sample Doctolib server.'
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: doctobil@swagger.io
+  license:
+    name: 'Apache 2.0'
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  version: 1.0.0
+paths:
+  /Patient:
+    post:
+      tags:
+        - patient
+      operationId: create
+      requestBody:
+        $ref: '#/components/requestBodies/PatientDTO'
+      responses:
+        '201':
+          description: 'Patient created'
+        '404':
+          description: 'Patient Id does not exist'
+components:
+  schemas:
+    PatientDTO:
+      title: 'Le PatientDTO'
+      description: PatientDTO
+      required:
+        - nom
+        - prenom
+        - noSecu
+        - ddn
+        - adresse
+        - ville
+        - telephone
+        - mail
+      properties:
+        nom:
+          title: NomPatientDTO
+          description: NomPatientDTO
+        noSecu:
+          title: NoSecuPatientDTO
+          description: NoSecuPatientDTO
+          type: integer
+        prenom:
+          title: PrenomPatientDTO
+          description: PrenomPatientDTO
+        adresse:
+          title: AdressePatientDTO
+          description: AdressePatientDTO
+        ville:
+          title: VillePatientDTO
+          description: VillePatientDTO
+        mail:
+          title: MailPatientDTO
+          description: MailPatientDTO
+        telephone:
+          title: TelephonePatientDTO
+          description: TelephonePatientDTO
+        sexe:
+          title: SexePatientDTO
+          description: SexePatientDTO
+        ddn:
+          title: DdnPatientDTO
+          description: DdnPatientDTO
+      type: object
+  requestBodies:
+    PatientDTO:
+      description: 'PatientDTO object that needs to be added to the store'
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PatientDTO'

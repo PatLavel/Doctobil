@@ -9,6 +9,9 @@ use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use OpenApi\Annotations as OA;
+
+
 
 class PatientController extends AbstractFOSRestController
 {
@@ -45,6 +48,20 @@ class PatientController extends AbstractFOSRestController
 
 
     /**
+     * @OA\Post(
+     *     path="/Patient",
+     *     tags={"patient"},
+     *     operationId="create",
+     *     @OA\Response(
+     *         response=201,
+     *         description="Patient created"
+     *     ),
+     *     @OA\Response(
+     *          response=404,
+     *          description="Patient Id does not exist"
+     *     ),
+     * requestBody={"$ref": "#/components/requestBodies/PatientDTO"}
+     * )
      * @Post("/Patient")
      * @ParamConverter("patient", converter = "fos_rest.request_body")
      * @return void

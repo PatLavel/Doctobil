@@ -3,18 +3,100 @@
 namespace App\DTO;
 
 use DateTime;
+use OpenApi\Annotations as OA;
 
+
+/**
+ *  @OA\Schema(
+ *     description="PatientDTO",
+ *     title="Le PatientDTO",
+ *     required={"nom", "prenom", "noSecu", "ddn", "adresse", "ville", "telephone", "mail"},
+ *     
+ * )
+ */
 class PatientDTO
 {
     private $id;
+    /**
+     * @OA\Property(
+     *    
+     *     description="NomPatientDTO",
+     *     title="NomPatientDTO"
+     * )
+     *  
+     */
     private $nom;
+    /**
+     * @OA\Property(
+     *     type = "integer",
+     *     description="NoSecuPatientDTO",
+     *     title="NoSecuPatientDTO"
+     * )
+     *  
+     */
     private $noSecu;
+    /**
+     * @OA\Property(
+     *     
+     *     description="PrenomPatientDTO",
+     *     title="PrenomPatientDTO"
+     * )
+     *  
+     */
     private $prenom;
+    /**
+     * @OA\Property(
+     *    
+     *     description="AdressePatientDTO",
+     *     title="AdressePatientDTO"
+     * )
+     *  
+     */
     private $adresse;
+    /**
+     * @OA\Property(
+     *    
+     *     description="VillePatientDTO",
+     *     title="VillePatientDTO"
+     * )
+     *  
+     */
     private $ville;
+    /**
+     * @OA\Property(
+     *    
+     *     description="MailPatientDTO",
+     *     title="MailPatientDTO"
+     * )
+     *  
+     */
     private $mail;
+    /**
+     * @OA\Property(
+     *    
+     *     description="TelephonePatientDTO",
+     *     title="TelephonePatientDTO"
+     * )
+     *  
+     */
     private $telephone;
+    /**
+     * @OA\Property(
+     *    
+     *     description="SexePatientDTO",
+     *     title="SexePatientDTO"
+     * )
+     *  
+     */
     private $sexe;
+    /**
+     * @OA\Property(
+     *    
+     *     description="DdnPatientDTO",
+     *     title="DdnPatientDTO"
+     * )
+     *  
+     */
     private $ddn;
 
 
