@@ -51,4 +51,14 @@ class PatientService
         $this->entityManager->flush();
         return true;
     }
+
+    public function remove(int $id)
+    {
+
+        $patient = $this->PatientRepository->find($id);
+        $this->entityManager->remove($patient);
+        $this->entityManager->flush();
+
+        return true;
+    }
 }

@@ -2,18 +2,11 @@
 
 namespace App\Controller;
 
-use DateTime;
 use App\DTO\PatientDTO;
-use App\Entity\Patient;
-use App\Mapper\PatientMapper;
 use FOS\RestBundle\View\View;
 use App\Service\PatientService;
-use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\BrowserKit\Request;
 use FOS\RestBundle\Controller\Annotations\Get;
-use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations\Post;
-use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -72,12 +65,9 @@ class PatientController extends AbstractFOSRestController
     public function deletePat(int $id)
     {
 
-
-
-        $patient = $this->patientService->getRepository(PatientDTO::class)->find($id);
-
-        $this->entityManager->remove($patient);
-        $this->entityManager->flush();
-        return new View("Patient Removed Successfully", Response::HTTP_OK);
+        if (!$this->patientService->remove($id)) {
+            return View::create(null, 404);
+        }
+        return View::create(null, 201);
     }
 }
