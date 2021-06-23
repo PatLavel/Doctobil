@@ -58,7 +58,7 @@ class RdvDTO
     *     type="DocteurDTO",
     *     description="Rdv idDoc",
     *     title="Rdv idDoc",
-    *     ref="#/components/shemas/DocteurDTO"
+    *     ref="#/components/schemas/DocteurDTO"
     * )
     */
     private $idDoc;
@@ -68,7 +68,7 @@ class RdvDTO
     *     type="PatientDTO",
     *     description="Rdv idPat",
     *     title="Rdv idPat",
-    *     ref="#/components/shemas/PatientDTO"
+    *     ref="#/components/schemas/PatientDTO"
     * )
     */
     private $idPat;
@@ -77,7 +77,7 @@ class RdvDTO
     * @OA\Property(
     *     description="Rdv docteurDTO",
     *     title="Rdv docteurDTO",
-    *     ref="#/components/shemas/DocteurDTO"
+    *     ref="#/components/schemas/DocteurDTO"
     * )
     */
     private $docteurDTO;
@@ -85,7 +85,7 @@ class RdvDTO
     * @OA\Property(
     *     description="Rdv patientDTO",
     *     title="Rdv patientDTO",
-    *     ref="#/components/shemas/PatientDTO"
+    *     ref="#/components/schemas/PatientDTO"
     * )
     */ 
     private $patientDTO;

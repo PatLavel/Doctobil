@@ -1,15 +1,25 @@
 openapi: 3.0.0
 info:
-  title: 'Swagger Doctolib'
-  description: 'This is a sample Doctolib server.'
+  title: 'Swagger Petstore'
+  description: "This is a sample Petstore server.  You can find\r\n *     out more about Swagger at [http://swagger.io](http://swagger.io) \r\n *     or on [irc.freenode.net, #swagger](http://swagger.io/irc/)."
   termsOfService: 'http://swagger.io/terms/'
   contact:
-    email: doctobil@swagger.io
+    email: apiteam@swagger.io
   license:
     name: 'Apache 2.0'
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
   version: 1.0.0
 paths:
+  /Docteur:
+    post:
+      tags:
+        - Docteur
+      operationId: addDocteur
+      requestBody:
+        $ref: '#/components/requestBodies/DocteurDTO'
+      responses:
+        '405':
+          description: 'Invalid input'
   /Patient:
     post:
       tags:
@@ -22,8 +32,64 @@ paths:
           description: 'Patient created'
         '404':
           description: 'Patient Id does not exist'
+  /Rdv:
+    post:
+      tags:
+        - Rdv
+      operationId: addRdv
+      requestBody:
+        $ref: '#/components/requestBodies/Rdv'
+      responses:
+        '405':
+          description: 'Invalid input'
+      security:
+        -
+          Rdvstore_auth:
+            - 'write:Rdvs'
+            - 'read:Rdvs'
 components:
   schemas:
+    DocteurDTO:
+      title: 'Docteur model'
+      description: 'Docteur model'
+      required:
+        - nom
+        - prenom
+        - mail
+        - telephone
+        - ville
+        - adresse
+        - specialite
+      properties:
+        nom:
+          title: 'Docteur nom'
+          description: 'Docteur nom'
+          type: string
+        prenom:
+          title: 'Docteur prenom'
+          description: 'Docteur prenom'
+          type: string
+        mail:
+          title: 'Docteur mail'
+          description: 'Docteur mail'
+          type: string
+        specialite:
+          title: 'Docteur specialite'
+          description: 'Docteur specialite'
+          type: string
+        telephone:
+          title: 'Docteur telephone'
+          description: 'Docteur telephone'
+          type: string
+        ville:
+          title: 'Docteur ville'
+          description: 'Docteur ville'
+          type: string
+        adresse:
+          title: 'Docteur adresse'
+          description: 'Docteur adresse'
+          type: string
+      type: object
     PatientDTO:
       title: 'Le PatientDTO'
       description: PatientDTO
@@ -66,11 +132,49 @@ components:
           title: DdnPatientDTO
           description: DdnPatientDTO
       type: object
+    RdvDTO:
+      title: 'Rdv model'
+      description: 'Rdv model'
+      required:
+        - date
+        - heure
+        - lieu
+        - idDoc
+        - idPat
+      properties:
+        date:
+          title: 'Rdv date'
+          description: 'Rdv date'
+        lieu:
+          title: 'Rdv lieu'
+          description: 'Rdv lieu'
+          type: string
+        heure:
+          title: 'Rdv heure'
+          description: 'Rdv heure'
+        idDoc:
+          $ref: '#/components/schemas/DocteurDTO'
+        idPat:
+          $ref: '#/components/schemas/PatientDTO'
+        docteurDTO:
+          $ref: '#/components/schemas/DocteurDTO'
+        patientDTO:
+          $ref: '#/components/schemas/PatientDTO'
+      type: object
+      xml:
+        name: Rdv
   requestBodies:
-    PatientDTO:
-      description: 'PatientDTO object that needs to be added to the store'
+    DocteurDTO:
+      description: 'Docteur object that needs to be added'
       required: true
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PatientDTO'
+            $ref: '#/components/schemas/DocteurDTO'
+    RdvDTO:
+      description: 'Rdv object that needs to be added'
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RdvDTO'
