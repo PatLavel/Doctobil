@@ -20,9 +20,13 @@ class DocteurMapper
     public function convertDocteurDTOToDocteurEntity(DocteurDTO $DocteurDTO): Docteur
     {
         $Docteur = new Docteur();
-        $Docteur->setNom($DocteurDTO->getNom())->setPrenom($DocteurDTO->getPrenom())->setVille($DocteurDTO->getVille())
-        ->setSpecialite($DocteurDTO->getSpecialite())->setMail($DocteurDTO->getMail())
-        ->setAdresse($DocteurDTO->getAdresse())->setTelephone($DocteurDTO->getTelephone());
+        $Docteur->setNom($DocteurDTO->getNom())
+        ->setPrenom($DocteurDTO->getPrenom())
+        ->setVille($DocteurDTO->getVille())
+        ->setSpecialite($DocteurDTO->getSpecialite())
+        ->setMail($DocteurDTO->getMail())
+        ->setAdresse($DocteurDTO->getAdresse())
+        ->setTelephone($DocteurDTO->getTelephone());
         // $Docteur->setMedecin($medecinMapper->convertMedecinTOToMedecinEntity($DocteurDTO->getMedecinDTO()));
 
         return $Docteur;

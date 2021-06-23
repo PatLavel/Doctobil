@@ -183,7 +183,7 @@ class PatientDTO
     /**
      * Get the value of adresse
      */
-    public function getAdresse(): string
+    public function getAdresse(): ?string
     {
         return $this->adresse;
     }

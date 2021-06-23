@@ -3,14 +3,15 @@
 namespace App\Controller;
 
 use App\DTO\PatientDTO;
+use App\Entity\Patient;
 use FOS\RestBundle\View\View;
+use OpenApi\Annotations as OA;
 use App\Service\PatientService;
 use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use OpenApi\Annotations as OA;
-
 
 
 class PatientController extends AbstractFOSRestController
@@ -63,7 +64,7 @@ class PatientController extends AbstractFOSRestController
      * requestBody={"$ref": "#/components/requestBodies/PatientDTO"}
      * )
      * @Post("/patients")
-     * @ParamConverter("patient", converter = "fos_rest.request_body")
+     * @ParamConverter("patientDTO", converter = "fos_rest.request_body")
      * @return void
      */
     public function create(PatientDTO $patientDTO)
@@ -87,4 +88,21 @@ class PatientController extends AbstractFOSRestController
         }
         return View::create(null, 201);
     }
+
+    	
+    /**
+     * @Put("/patients/Edit/{id}")
+     * @ParamConverter("PatientDTO", converter="fos_rest.request_body")
+     * @return void
+     */
+
+    public function putPat(PatientDTO $PatientDTO,Patient $patient)
+    {
+        if (!$this->patientService->put($PatientDTO , $patient)) {
+            return View::create(null, 404);
+        }
+        return View::create(null, 201);
+    }
+    
 }
+
