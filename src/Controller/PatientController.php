@@ -24,7 +24,7 @@ class PatientController extends AbstractFOSRestController
     }
 
     /**
-     * @Get("Patient")
+     * @Get("patients")
      * @return void
      */
     public function getAll()
@@ -35,7 +35,7 @@ class PatientController extends AbstractFOSRestController
 
     /**
      * 
-     * @Get("Patient/{id}")
+     * @Get("patients/{id}")
      * 
      * @param int $id
      * @return void
@@ -50,7 +50,7 @@ class PatientController extends AbstractFOSRestController
     /**
      * @OA\Post(
      *     path="/Patient",
-     *     tags={"patient"},
+     *     tags={"Patient"},
      *     operationId="create",
      *     @OA\Response(
      *         response=201,
@@ -62,7 +62,7 @@ class PatientController extends AbstractFOSRestController
      *     ),
      * requestBody={"$ref": "#/components/requestBodies/PatientDTO"}
      * )
-     * @Post("/Patient")
+     * @Post("/patients")
      * @ParamConverter("patient", converter = "fos_rest.request_body")
      * @return void
      */
@@ -75,7 +75,7 @@ class PatientController extends AbstractFOSRestController
     }
 
     /**
-     * @Get("/Patient/Delete/{id}")
+     * @Get("/patients/Delete/{id}")
      * 
      * @return void
      */

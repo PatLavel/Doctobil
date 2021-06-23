@@ -57,11 +57,24 @@ class DocteurService
     
     public function put(int $id,DocteurDTO $docteurDTO)
     {
-        //$docteurToPut = $this->docteurRepository->find($id);
+        $docteurToChange = $this->docteurRepository->find($id);
+
         $docteurToPut = (new DocteurMapper)->convertDocteurDTOToDocteurEntity($docteurDTO);
-        dd($docteurDTO);
-        $this->entityManager->persist($docteurToPut);
+
+
+        $docteurToChange->setNom($docteurToPut->getNom())
+        ->setPrenom($docteurToPut->getPrenom())
+        ->setMail($docteurToPut->getMail())
+        ->setTelephone($docteurToPut->getTelephone())
+        ->setVille($docteurToPut->getVille())
+        ->setSpecialite($docteurToPut->getSpecialite())
+        ->setAdresse($docteurToPut->getAdresse());
+
+        
+        //$this->entityManager->persist($docteurToPut);
+        //dd($docteurToChange);
         $this->entityManager->flush();
+        
         
         return true;
     }

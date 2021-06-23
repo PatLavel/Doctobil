@@ -28,7 +28,7 @@ class DocteurController extends AbstractFOSRestController
     }
 
     /**
-     * @Get("Docteur")
+     * @Get("docteurs")
      * @return void
      * 
      */
@@ -40,7 +40,7 @@ class DocteurController extends AbstractFOSRestController
     }
 
     /**
-     * @Get("Docteur/{id}")
+     * @Get("docteurs/{id}")
      * @return void
      * 
      */
@@ -51,7 +51,7 @@ class DocteurController extends AbstractFOSRestController
     }
 
     /**
-     * @Get("/Docteur/Delete/{id}")
+     * @Get("/docteurs/Delete/{id}")
      * 
      * @return void
      */
@@ -65,7 +65,7 @@ class DocteurController extends AbstractFOSRestController
 
     /**
      *  
-     * @Post("/Docteur")
+     * @Post("/docteurs")
      * @ParamConverter("DocteurDTO", converter="fos_rest.request_body")
      * 
      * Add a new Docteur
@@ -94,7 +94,7 @@ class DocteurController extends AbstractFOSRestController
 
 
     /**
-     * @Put("/Docteur/Edit/{id}")
+     * @Put("/docteurs/Edit/{id}")
      * @ParamConverter("DocteurDTO", converter="fos_rest.request_body")
      * @return void
      */
