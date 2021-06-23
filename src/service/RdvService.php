@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\DTO\RdvDTO;
+use App\Entity\Rdv;
 use App\Mapper\RdvMapper;
 use App\Repository\RdvRepository;
 use App\Repository\DocteurRepository;
@@ -45,14 +46,15 @@ class RdvService
 
     public function create(RdvDTO $rdvDTO)
     {
+        $bob = new Rdv;
         $selectedDocteur = $this->docteurRepository->find($rdvDTO->getIdDoc());
-        $selectedPatient = $this->patientRepository->find($rdvDTO->getIdPat());
-        if ($selectedDocteur == null || $selectedPatient == null) {
+        $selectedRdv = $this->patientRepository->find($rdvDTO->getIdPat());
+        if ($selectedDocteur == null || $selectedRdv == null) {
             return false;
         }
-        $rdvToSave = (new RdvMapper)->convertRdvDTOToRdvEntity($rdvDTO);
+        $rdvToSave = (new RdvMapper)->convertRdvDTOToRdvEntity($rdvDTO,$bob);
         $rdvToSave->setIdDoc($selectedDocteur);
-        $rdvToSave->setIdPat($selectedPatient);
+        $rdvToSave->setIdPat($selectedRdv);
         //dd($rdvToSave);
         $this->entityManager->persist($rdvToSave);
         $this->entityManager->flush();
@@ -65,6 +67,17 @@ class RdvService
         $Rdv = $this->RdvRepository->find($id);
         $this->entityManager->remove($Rdv);
         $this->entityManager->flush();
+        
+        return true;
+    }
+
+    public function put(RdvDTO $rdvDTO,Rdv $rdvToChange)
+    {
+        //$rdvToChange = $this->rdvRepository->find($id);
+        $rdvToPut = (new RdvMapper)->convertRdvDTOToRdvEntity($rdvDTO,$rdvToChange);
+        $this->entityManager->persist($rdvToPut);
+        $this->entityManager->flush();
+        
         
         return true;
     }

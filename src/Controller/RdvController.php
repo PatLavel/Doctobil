@@ -11,6 +11,7 @@ use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\BrowserKit\Request;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\Put;
 use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -87,7 +88,20 @@ class RdvController extends AbstractFOSRestController
             return View::create(null, 404);
         }
         return View::create(null, 201);
+    }
 
-        
+
+    /**
+     * @Put("/rdvs/{id}")
+     * @ParamConverter("rdvDTO", converter="fos_rest.request_body")
+     * @return void
+     */
+
+    public function putRdv(RdvDTO $rdvDTO,Rdv $rdv)
+    {
+        if (!$this->RdvService->put($rdvDTO , $rdv)) {
+            return View::create(null, 404);
+        }
+        return View::create(null, 201);
     }
 }

@@ -21,13 +21,34 @@ class RdvMapper
         return $pDTO;
     }
 
-    public function convertRdvDTOToRdvEntity(RdvDTO $RdvDTO): Rdv
+    public function convertRdvDTOToRdvEntity(RdvDTO $rdvDTO, Rdv $rdvToChange): Rdv
     {
-        // $DocteurMapper = new DocteurMapper();
-        // $PatientMapper = new PatientMapper();
-        $Rdv = new Rdv();
-        $Rdv->setDate($RdvDTO->getDate())->setHeure($RdvDTO->getHeure())->setLieu($RdvDTO->getLieu());
+        // // $DocteurMapper = new DocteurMapper();
+        // // $PatientMapper = new PatientMapper();
+        // $Rdv = new Rdv();
+        // $Rdv->setDate($RdvDTO->getDate())->setHeure($RdvDTO->getHeure())->setLieu($RdvDTO->getLieu());
 
-        return $Rdv;
+        // return $Rdv;
+
+
+        if (!$rdvToChange) {
+            $rdv = new Rdv();
+            $rdv->setDate($rdvDTO->getDate())
+                ->setHeure($rdvDTO->getHeure())
+                ->setLieu($rdvDTO->getLieu())
+                ->setIdPat($rdvDTO->getIdPat())
+                ->setIdDoc($rdvDTO->getIdDoc());
+
+            return $rdv;
+        } else {
+
+            $rdvToChange->setDate($rdvDTO->getDate())
+                ->setHeure($rdvDTO->getHeure())
+                ->setLieu($rdvDTO->getLieu())
+                ->setIdPat($rdvDTO->getIdPat())
+                ->setIdDoc($rdvDTO->getIdDoc());
+
+            return $rdvToChange;
+        }
     }
 }

@@ -67,18 +67,7 @@ class PatientService
     {
         //$patientToChange = $this->patientRepository->find($id);
         $patientToPut = (new PatientMapper)->convertPatientDTOToPatientEntity($patientDTO,$patientToChange);
-
-        // $patientToChange->setNom($patientToPut->getNom())
-        // ->setPrenom($patientToPut->getPrenom())
-        // ->setMail($patientToPut->getMail())
-        // ->setTelephone($patientToPut->getTelephone())
-        // ->setVille($patientToPut->getVille())
-        // ->setSexe($patientToPut->getSexe())
-        // ->setDdn($patientToPut->getDdn())
-        // ->setNoSecu($patientToPut->getNoSecu())
-        // ->setAdresse($patientToPut->getAdresse());
         $this->entityManager->persist($patientToPut);
-        //dd($patientToChange);
         $this->entityManager->flush();
         
         
