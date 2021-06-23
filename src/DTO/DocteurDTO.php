@@ -1,8 +1,9 @@
 <?php
 
+namespace App\DTO;
+
 use OpenApi\Annotations as OA;
 
-namespace App\DTO;
 
 /**
  * Class Docteur
@@ -19,7 +20,7 @@ class DocteurDTO
     private $id;
 
 
-     /**
+    /**
      * @OA\Property(
      *     type="string",
      *     description="Docteur nom",
@@ -31,69 +32,69 @@ class DocteurDTO
     private $nom;
 
     /**
-    * @OA\Property(
-    *     type="string",
-    *     description="Docteur prenom",
-    *     title="Docteur prenom"
-    * )
-    *
-    * @var string
-    */
+     * @OA\Property(
+     *     type="string",
+     *     description="Docteur prenom",
+     *     title="Docteur prenom"
+     * )
+     *
+     * @var string
+     */
     private $prenom;
 
     /**
-    * @OA\Property(
-    *     type="string",
-    *     description="Docteur mail",
-    *     title="Docteur mail"
-    * )
-    *
-    * @var string
-    */
+     * @OA\Property(
+     *     type="string",
+     *     description="Docteur mail",
+     *     title="Docteur mail"
+     * )
+     *
+     * @var string
+     */
     private $mail;
 
     /**
-    * @OA\Property(
-    *     type="string",
-    *     description="Docteur specialite",
-    *     title="Docteur specialite"
-    * )
-    *
-    * @var string
-    */
+     * @OA\Property(
+     *     type="string",
+     *     description="Docteur specialite",
+     *     title="Docteur specialite"
+     * )
+     *
+     * @var string
+     */
     private $specialite;
 
     /**
-    * @OA\Property(
-    *     type="string",
-    *     description="Docteur telephone",
-    *     title="Docteur telephone"
-    * )
-    *
-    * @var string
-    */
+     * @OA\Property(
+     *     type="string",
+     *     description="Docteur telephone",
+     *     title="Docteur telephone"
+     * )
+     *
+     * @var string
+     */
     private $telephone;
 
     /**
-    * @OA\Property(
-    *     type="string",
-    *     description="Docteur ville",
-    *     title="Docteur ville"
-    * )
-    *
-    * @var string
-    */
+     * @OA\Property(
+     *     type="string",
+     *     description="Docteur ville",
+     *     title="Docteur ville"
+     * )
+     *
+     * @var string
+     */
     private $ville;
 
     /**
-    * @OA\Property(
-    *     type="string",
-    *     description="Docteur adresse",
-    *     title="Docteur adresse"
-    * )
-    *
-    * @var string
-    */
+     * @OA\Property(
+     *     type="string",
+     *     description="Docteur adresse",
+     *     title="Docteur adresse"
+     * )
+     *
+     * @var string
+     */
     private $adresse;
 
     public function getId(): ?int
@@ -132,7 +133,7 @@ class DocteurDTO
         return $this;
     }
 
-    
+
     public function getVille(): ?string
     {
         return $this->ville;
@@ -144,7 +145,7 @@ class DocteurDTO
 
         return $this;
     }
-    
+
     public function getSpecialite(): ?string
     {
         return $this->specialite;
@@ -156,7 +157,7 @@ class DocteurDTO
 
         return $this;
     }
-    
+
     public function getAdresse(): ?string
     {
         return $this->adresse;
@@ -175,12 +176,12 @@ class DocteurDTO
 
         return $this;
     }
-    
+
     public function getTelephone(): ?string
     {
         return $this->telephone;
     }
-    
+
     public function getMail(): ?string
     {
         return $this->mail;
