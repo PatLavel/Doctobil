@@ -57,8 +57,8 @@ class PatientController extends AbstractFOSRestController
      *         description="Patient created"
      *     ),
      *     @OA\Response(
-     *          response=404,
-     *          description="Patient Id does not exist"
+     *          response=405,
+     *          description="Input Invalid"
      *     ),
      * requestBody={"$ref": "#/components/requestBodies/PatientDTO"}
      * )

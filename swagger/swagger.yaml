@@ -30,28 +30,23 @@ paths:
       responses:
         '201':
           description: 'Patient created'
-        '404':
-          description: 'Patient Id does not exist'
+        '405':
+          description: 'Input Invalid'
   /Rdv:
     post:
       tags:
         - Rdv
       operationId: addRdv
       requestBody:
-        $ref: '#/components/requestBodies/Rdv'
+        $ref: '#/components/requestBodies/RdvDTO'
       responses:
         '405':
-          description: 'Invalid input'
-      security:
-        -
-          Rdvstore_auth:
-            - 'write:Rdvs'
-            - 'read:Rdvs'
+          description: rdvAdd
 components:
   schemas:
     DocteurDTO:
-      title: 'Docteur model'
-      description: 'Docteur model'
+      title: DocteurDTO
+      description: DocteurDTO
       required:
         - nom
         - prenom
@@ -133,8 +128,8 @@ components:
           description: DdnPatientDTO
       type: object
     RdvDTO:
-      title: 'Rdv model'
-      description: 'Rdv model'
+      title: RdvDTO
+      description: RdvDTO
       required:
         - date
         - heure
@@ -161,8 +156,6 @@ components:
         patientDTO:
           $ref: '#/components/schemas/PatientDTO'
       type: object
-      xml:
-        name: Rdv
   requestBodies:
     DocteurDTO:
       description: 'Docteur object that needs to be added'
@@ -178,3 +171,10 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/RdvDTO'
+    PatientDTO:
+      description: 'Patient object that needs to be added'
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PatientDTO'

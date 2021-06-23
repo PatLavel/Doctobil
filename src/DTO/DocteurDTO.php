@@ -8,8 +8,8 @@ namespace App\DTO;
  * Class Docteur
  *
  * @OA\Schema(
- *     description="Docteur model",
- *     title="Docteur model",
+ *     description="DocteurDTO",
+ *     title="DocteurDTO",
  *     required={"nom", "prenom", "mail", "telephone", "ville", "adresse", "specialite"}
  * )
  */

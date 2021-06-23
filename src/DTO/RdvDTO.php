@@ -2,6 +2,7 @@
 
 namespace App\DTO;
 
+use OpenApi\Annotations as OA;
 
 /**
  * Class Rdv
@@ -9,12 +10,9 @@ namespace App\DTO;
  *
  *
  * @OA\Schema(
- *     description="Rdv model",
- *     title="Rdv model",
- *     required={"date", "heure", "lieu", "idDoc", "idPat"},
- *     @OA\Xml(
- *         name="Rdv"
- *     )
+ *     description="RdvDTO",
+ *     title="RdvDTO",
+ *     required={"date", "heure", "lieu", "idDoc", "idPat"}
  * )
  */
 

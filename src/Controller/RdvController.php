@@ -16,6 +16,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 
+use OpenApi\Annotations as OA;
 
 
 class RdvController extends AbstractFOSRestController
@@ -60,12 +61,9 @@ class RdvController extends AbstractFOSRestController
      *     operationId="addRdv",
      *     @OA\Response(
      *         response=405,
-     *         description="Invalid input"
+     *         description="rdvAdd"
      *     ),
-     *     security={
-     *         {"Rdvstore_auth": {"write:Rdvs", "read:Rdvs"}}
-     *     },
-     *     requestBody={"$ref": "#/components/requestBodies/Rdv"}
+     *     requestBody={"$ref": "#/components/requestBodies/RdvDTO"}
      * )
      * 
      * @return void
