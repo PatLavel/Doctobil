@@ -15,6 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
+
+
+
 class RdvController extends AbstractFOSRestController
 {
 
@@ -48,6 +51,23 @@ class RdvController extends AbstractFOSRestController
     /**
      * @Post("/rdvs")
      * @ParamConverter("rdvDTO", converter = "fos_rest.request_body")
+     * 
+     * Add a new Rdv
+     * 
+     * @OA\Post(
+     *     path="/Rdv",
+     *     tags={"Rdv"},
+     *     operationId="addRdv",
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     ),
+     *     security={
+     *         {"Rdvstore_auth": {"write:Rdvs", "read:Rdvs"}}
+     *     },
+     *     requestBody={"$ref": "#/components/requestBodies/Rdv"}
+     * )
+     * 
      * @return void
      */
     public function create(RdvDTO $rdvDTO)

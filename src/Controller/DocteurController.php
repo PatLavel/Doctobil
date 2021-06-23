@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use OpenApi\Annotations as OA;
+
+
 use App\DTO\DocteurDTO;
 use App\Entity\Docteur;
 use FOS\RestBundle\View\View;
@@ -54,40 +57,51 @@ class DocteurController extends AbstractFOSRestController
      */
     public function deleteDoc(int $id)
     {
-        // $em = $this->getDoctrine()->getManager();
-        // $docteur = $em->getRepository(Docteur::class)->find($id);
-        // $em->remove($docteur);
-        // $em->flush();
-
-        if(!$this->docteurService->remove($id)){
+        if (!$this->docteurService->remove($id)) {
             return View::create(null, 404);
         }
         return View::create(null, 201);
     }
-    
+
     /**
      *  
      * @Post("/Docteur")
      * @ParamConverter("DocteurDTO", converter="fos_rest.request_body")
+     * 
+     * Add a new Docteur
+     * 
+     * @OA\Post(
+     *     path="/Docteur",
+     *     tags={"Docteur"},
+     *     operationId="addDocteur",
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     ),
+     *     requestBody={"$ref": "#/components/requestBodies/DocteurDTO"}
+     * )
+     * 
      * @return void
      */
+
     public function createDoc(DocteurDTO $DocteurDTO)
     {
-        if(!$this->docteurService->save($DocteurDTO)){
+        if (!$this->docteurService->save($DocteurDTO)) {
             return View::create(null, 404);
         }
         return View::create(null, 201);
     }
 
-    
+
     /**
      * @Put("/Docteur/Edit/{id}")
      * @ParamConverter("DocteurDTO", converter="fos_rest.request_body")
      * @return void
      */
+
     public function putDoc(int $id, DocteurDTO $DocteurDTO)
     {
-        if(!$this->docteurService->put($id, $DocteurDTO)){
+        if (!$this->docteurService->put($id, $DocteurDTO)) {
             return View::create(null, 404);
         }
         return View::create(null, 201);

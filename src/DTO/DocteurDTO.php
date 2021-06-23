@@ -1,12 +1,100 @@
 <?php
 
+use OpenApi\Annotations as OA;
+
 namespace App\DTO;
+
+/**
+ * Class Docteur
+ *
+ * @OA\Schema(
+ *     description="Docteur model",
+ *     title="Docteur model",
+ *     required={"nom", "prenom", "mail", "telephone", "ville", "adresse", "specialite"}
+ * )
+ */
 
 class DocteurDTO
 {
-
     private $id;
+
+
+     /**
+     * @OA\Property(
+     *     type="string",
+     *     description="Docteur nom",
+     *     title="Docteur nom",
+     * )
+     *
+     * @var string
+     */
     private $nom;
+
+    /**
+    * @OA\Property(
+    *     type="string",
+    *     description="Docteur prenom",
+    *     title="Docteur prenom"
+    * )
+    *
+    * @var string
+    */
+    private $prenom;
+
+    /**
+    * @OA\Property(
+    *     type="string",
+    *     description="Docteur mail",
+    *     title="Docteur mail"
+    * )
+    *
+    * @var string
+    */
+    private $mail;
+
+    /**
+    * @OA\Property(
+    *     type="string",
+    *     description="Docteur specialite",
+    *     title="Docteur specialite"
+    * )
+    *
+    * @var string
+    */
+    private $specialite;
+
+    /**
+    * @OA\Property(
+    *     type="string",
+    *     description="Docteur telephone",
+    *     title="Docteur telephone"
+    * )
+    *
+    * @var string
+    */
+    private $telephone;
+
+    /**
+    * @OA\Property(
+    *     type="string",
+    *     description="Docteur ville",
+    *     title="Docteur ville"
+    * )
+    *
+    * @var string
+    */
+    private $ville;
+
+    /**
+    * @OA\Property(
+    *     type="string",
+    *     description="Docteur adresse",
+    *     title="Docteur adresse"
+    * )
+    *
+    * @var string
+    */
+    private $adresse;
 
     public function getId(): ?int
     {

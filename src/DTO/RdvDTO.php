@@ -2,16 +2,92 @@
 
 namespace App\DTO;
 
+
+/**
+ * Class Rdv
+ *
+ *
+ *
+ * @OA\Schema(
+ *     description="Rdv model",
+ *     title="Rdv model",
+ *     required={"date", "heure", "lieu", "idDoc", "idPat"},
+ *     @OA\Xml(
+ *         name="Rdv"
+ *     )
+ * )
+ */
+
+
 class RdvDTO
 {
 
     private $id;
+
+    /**
+    * @OA\Property(
+    *     description="Rdv date",
+    *     title="Rdv date"
+    * )
+    */
     private $date;
+    
+    /**
+    * @OA\Property(
+    *     type="string",
+    *     description="Rdv lieu",
+    *     title="Rdv lieu"
+    * )
+    *
+    *  
+    */
     private $lieu;
+    
+    /**
+    * @OA\Property(
+    *     description="Rdv heure",
+    *     title="Rdv heure"
+    * )
+    *
+    */
     private $heure;
+    
+   
+    /**
+    * @OA\Property(
+    *     type="DocteurDTO",
+    *     description="Rdv idDoc",
+    *     title="Rdv idDoc",
+    *     ref="#/components/shemas/DocteurDTO"
+    * )
+    */
     private $idDoc;
+    
+    /**
+    * @OA\Property(
+    *     type="PatientDTO",
+    *     description="Rdv idPat",
+    *     title="Rdv idPat",
+    *     ref="#/components/shemas/PatientDTO"
+    * )
+    */
     private $idPat;
+    
+    /**
+    * @OA\Property(
+    *     description="Rdv docteurDTO",
+    *     title="Rdv docteurDTO",
+    *     ref="#/components/shemas/DocteurDTO"
+    * )
+    */
     private $docteurDTO;
+    /**
+    * @OA\Property(
+    *     description="Rdv patientDTO",
+    *     title="Rdv patientDTO",
+    *     ref="#/components/shemas/PatientDTO"
+    * )
+    */ 
     private $patientDTO;
 
     public function getId(): ?int
