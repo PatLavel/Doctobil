@@ -2,17 +2,13 @@
 
 namespace App\Controller;
 
-use OpenApi\Annotations as OA;
-
-
 use App\DTO\DocteurDTO;
 use App\Entity\Docteur;
 use FOS\RestBundle\View\View;
+use OpenApi\Annotations as OA;
 use App\Service\DocteurService;
-use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Put;
-use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -66,7 +62,7 @@ class DocteurController extends AbstractFOSRestController
     /**
      *  
      * @Post("/docteurs")
-     * @ParamConverter("DocteurDTO", converter="fos_rest.request_body")
+     * @ParamConverter("docteurDTO", converter="fos_rest.request_body")
      * 
      * Add a new Docteur
      * 
@@ -84,9 +80,9 @@ class DocteurController extends AbstractFOSRestController
      * @return void
      */
 
-    public function createDoc(DocteurDTO $DocteurDTO)
+    public function createDoc(DocteurDTO $docteurDTO)
     {
-        if (!$this->docteurService->save($DocteurDTO)) {
+        if (!$this->docteurService->save($docteurDTO)) {
             return View::create(null, 404);
         }
         return View::create(null, 201);
@@ -95,13 +91,13 @@ class DocteurController extends AbstractFOSRestController
 
     /**
      * @Put("/docteurs/Edit/{id}")
-     * @ParamConverter("DocteurDTO", converter="fos_rest.request_body")
+     * @ParamConverter("docteurDTO", converter="fos_rest.request_body")
      * @return void
      */
 
-    public function putDoc(int $id, DocteurDTO $DocteurDTO)
+    public function putDoc(Docteur $docteur, DocteurDTO $docteurDTO)
     {
-        if (!$this->docteurService->put($id, $DocteurDTO)) {
+        if (!$this->docteurService->put($docteur, $docteurDTO)) {
             return View::create(null, 404);
         }
         return View::create(null, 201);

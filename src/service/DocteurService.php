@@ -37,8 +37,8 @@ class DocteurService
 
     public function save(DocteurDTO $docteurDTO)
     {
-
-        $docteurToSave = (new DocteurMapper)->convertDocteurDTOToDocteurEntity($docteurDTO);
+        $bob = new Docteur;
+        $docteurToSave = (new DocteurMapper)->convertDocteurDTOToDocteurEntity($docteurDTO, $bob);
         $this->entityManager->persist($docteurToSave);
         $this->entityManager->flush();
         return true;
@@ -55,24 +55,12 @@ class DocteurService
         return true;
     }
     
-    public function put(int $id,DocteurDTO $docteurDTO)
+    public function put(Docteur $docteurToChange, DocteurDTO $docteurDTO )
     {
-        $docteurToChange = $this->docteurRepository->find($id);
-
-        $docteurToPut = (new DocteurMapper)->convertDocteurDTOToDocteurEntity($docteurDTO);
-
-
-        $docteurToChange->setNom($docteurToPut->getNom())
-        ->setPrenom($docteurToPut->getPrenom())
-        ->setMail($docteurToPut->getMail())
-        ->setTelephone($docteurToPut->getTelephone())
-        ->setVille($docteurToPut->getVille())
-        ->setSpecialite($docteurToPut->getSpecialite())
-        ->setAdresse($docteurToPut->getAdresse());
-
         
-        //$this->entityManager->persist($docteurToPut);
-        //dd($docteurToChange);
+
+        $docteurToPut = (new DocteurMapper)->convertDocteurDTOToDocteurEntity($docteurDTO, $docteurToChange);
+        $this->entityManager->persist($docteurToPut);
         $this->entityManager->flush();
         
         

@@ -92,13 +92,13 @@ class PatientController extends AbstractFOSRestController
     	
     /**
      * @Put("/patients/Edit/{id}")
-     * @ParamConverter("PatientDTO", converter="fos_rest.request_body")
+     * @ParamConverter("patientDTO", converter="fos_rest.request_body")
      * @return void
      */
 
-    public function putPat(PatientDTO $PatientDTO,Patient $patient)
+    public function putPat(PatientDTO $patientDTO,Patient $patient)
     {
-        if (!$this->patientService->put($PatientDTO , $patient)) {
+        if (!$this->patientService->put($patientDTO , $patient)) {
             return View::create(null, 404);
         }
         return View::create(null, 201);
